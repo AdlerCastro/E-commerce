@@ -12,6 +12,12 @@
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch --passWithNoTests"
   },
+  "engines": {
+    "node": ">=18.18.0",
+    "pnpm": ">=9.6.0",
+    "yarn": "please-use-pnpm",
+    "npm": "please-use-pnpm"
+  },
   "dependencies": {
     "next": "15.3.2",
     "react": "^19.0.0",
