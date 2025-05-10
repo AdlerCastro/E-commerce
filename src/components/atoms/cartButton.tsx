@@ -1,13 +1,19 @@
 import { ShoppingCart } from 'lucide-react';
 import { Button } from '../ui/button';
 
+export interface CartButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  icon?: React.ReactNode;
+}
+
 export default function CartButton({
+  icon,
   children,
   ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+}: CartButtonProps) {
   return (
     <Button className='rounded-sm' {...props}>
-      <ShoppingCart className='h-5 w-5' />
+      {icon ? <>{icon}</> : <ShoppingCart className='h-5 w-5' />}
       {children}
     </Button>
   );
