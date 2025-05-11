@@ -1,7 +1,13 @@
-export default function Home() {
+import { getFeaturedProducts } from '@/actions/getFeaturedProducts';
+import HomePage from '@/components/templates/home';
+
+export default async function Home() {
+  const response = await getFeaturedProducts();
+  const { products } = response;
+
   return (
-    <div className='flex h-screen flex-col items-center justify-center gap-10 bg-zinc-900'>
-      <h1 className='text-white'>Home page</h1>
+    <div className='flex w-full justify-center'>
+      <HomePage products={products} />
     </div>
   );
 }
