@@ -6,7 +6,7 @@ import Image, { StaticImageData } from 'next/image';
 export interface CardProductProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
   description: string;
-  price: string;
+  price: number;
   image: string | StaticImageData;
   alt: string;
   featured?: boolean;
@@ -25,9 +25,8 @@ export default function CardProduct({
   return (
     <div
       className={cn(
-        'relative flex h-full max-h-52 w-full max-w-52 flex-col gap-3 rounded-lg md:max-h-70 md:max-w-70',
-        featured &&
-          'max-h-82 max-w-82 md:h-90 md:max-h-82 md:w-90 md:max-w-82 lg:h-95 lg:max-h-95 lg:w-95 lg:max-w-95',
+        'relative flex h-52 w-52 flex-col gap-3 rounded-lg md:h-70 md:w-70',
+        featured && 'h-72 w-72 md:h-68 md:w-68',
         className,
       )}
       {...props}
@@ -35,6 +34,8 @@ export default function CardProduct({
       <Image
         src={image}
         alt={alt}
+        width={featured ? 400 : 300}
+        height={featured ? 400 : 300}
         className='h-full w-full rounded-lg object-cover object-center'
       />
       {featured ? (
@@ -44,7 +45,7 @@ export default function CardProduct({
             {description}
           </p>
           <span className='text-center text-sm font-semibold md:text-base lg:text-lg'>
-            {price}
+            R${price} reais
           </span>
         </div>
       ) : (
@@ -52,7 +53,7 @@ export default function CardProduct({
           <h2 className='text-lg font-bold'>{title}</h2>
           <p className='line-clamp-3 text-sm'>{description}</p>
           <span className='text-center text-sm font-semibold md:text-base lg:text-lg'>
-            {price}
+            R${price} reais
           </span>
         </div>
       )}
