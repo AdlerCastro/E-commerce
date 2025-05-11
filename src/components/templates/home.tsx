@@ -1,4 +1,3 @@
-import { getFeaturedProducts } from '@/actions/getFeaturedProducts';
 import CardProduct from '@/components/atoms/cardProduct';
 import { Button } from '@/components/ui/button';
 import { Pages } from '@/enums/pages.enum';
