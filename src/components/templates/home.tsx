@@ -11,12 +11,12 @@ export default function HomePage({ products }: { products: Product[] }) {
       <h1 className='text-center text-3xl text-white underline underline-offset-4'>
         Welcome to the newest E-commerce
       </h1>
-      <div className='flex w-full flex-col gap-7.5 rounded-2xl bg-zinc-800 px-5 py-8'>
+      <div className='flex w-full max-w-220 flex-col items-center gap-7.5 rounded-2xl bg-zinc-800 px-5 py-8'>
         <div className='flex w-full items-center gap-2.5'>
           <h2 className='text-2xl text-nowrap text-white'>Featured products</h2>
           <span className='h-0.5 w-full rounded-full bg-white' />
         </div>
-        <div className='grid w-full grid-cols-1 items-center justify-center gap-5 md:grid-cols-2 lg:grid-cols-3'>
+        <div className='grid w-fit grid-cols-1 items-center justify-center gap-5 md:grid-cols-2 lg:grid-cols-3'>
           {products.map(
             (product, index) =>
               index < 6 && (
