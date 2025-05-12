@@ -22,6 +22,11 @@ export default function CardProduct({
   featured,
   ...props
 }: CardProductProps) {
+  const priceFormatted = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(price);
+
   return (
     <div
       className={cn(
@@ -45,7 +50,7 @@ export default function CardProduct({
             {description}
           </p>
           <span className='text-center text-sm font-semibold md:text-base lg:text-lg'>
-            R${price} reais
+            {priceFormatted}
           </span>
         </div>
       ) : (
@@ -53,7 +58,7 @@ export default function CardProduct({
           <h2 className='text-lg font-bold'>{title}</h2>
           <p className='line-clamp-3 text-sm'>{description}</p>
           <span className='text-center text-sm font-semibold md:text-base lg:text-lg'>
-            R${price} reais
+            {priceFormatted}
           </span>
         </div>
       )}
