@@ -15,6 +15,9 @@ jobs:
     strategy:
       matrix:
         node-version: [22]
+    env:
+      NEXT_PUBLIC_API_BASE_URL: ${{ secrets.NEXT_PUBLIC_API_BASE_URL }}
+      NEXT_PUBLIC_ENV: ${{ secrets.NEXT_PUBLIC_ENV }}
     steps:
       - uses: actions/checkout@v4
       - name: Install pnpm

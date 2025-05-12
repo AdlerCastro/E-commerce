@@ -1,3 +1,4 @@
+import Header from '@/components/molecules/header';
 import { CartProvider } from '@/contexts/cartContext';
 
 export default function HomeLayout({
@@ -6,8 +7,11 @@ export default function HomeLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className='min-h-screen w-full bg-zinc-900'>
-      <CartProvider>{children}</CartProvider>
-    </main>
+    <CartProvider>
+      <main className='relative min-h-screen w-full bg-zinc-900'>
+        <Header />
+        {children}
+      </main>
+    </CartProvider>
   );
 }
