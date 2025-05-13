@@ -3,10 +3,11 @@ import { Button } from '@/components/ui/button';
 import { Pages } from '@/enums/pages.enum';
 import { Product } from '@/types/product.type';
 import Link from 'next/link';
+import { Container } from '../atoms/container';
 
 export default function HomePage({ products }: { products: Product[] }) {
   return (
-    <div className='flex w-full max-w-[1280px] flex-col items-center gap-10 px-5 py-12.5 md:px-7.5 lg:px-12.5 lg:py-20'>
+    <Container className='px-5 md:px-7.5 lg:px-12.5'>
       <h1 className='px-5 text-center text-3xl font-bold text-white underline underline-offset-4 lg:px-7.5'>
         Welcome to the newest E-commerce
       </h1>
@@ -39,9 +40,9 @@ export default function HomePage({ products }: { products: Product[] }) {
           )}
         </div>
         <Button asChild className='mt-5 w-fit self-center'>
-          <Link href={`/${Pages.PRODUCTS}`}>See all products</Link>
+          <Link href={`${Pages.PRODUCTS}`}>See all products</Link>
         </Button>
       </div>
-    </div>
+    </Container>
   );
 }
