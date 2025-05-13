@@ -30,8 +30,8 @@ export default function CardProduct({
   return (
     <div
       className={cn(
-        'relative flex w-52 flex-col gap-3 rounded-lg md:w-70',
-        featured && 'h-72 w-72 md:h-68 md:w-68',
+        'relative flex w-full max-w-52 flex-col gap-3 rounded-lg md:max-w-70',
+        featured && 'h-72 max-w-72 md:h-68 md:max-w-68',
         className,
       )}
       {...props}
