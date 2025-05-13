@@ -19,7 +19,9 @@ export default function Header() {
         <div className='flex w-full flex-row items-center justify-between gap-5'>
           <Link href={`${Pages.PRODUCTS}`}>Products</Link>
         </div>
-        <CartButton>{totalFormatted}</CartButton>
+        <CartButton>
+          <span className='hidden min-[425px]:block'>{totalFormatted}</span>
+        </CartButton>
       </div>
     </div>
   );
