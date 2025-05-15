@@ -1,12 +1,19 @@
+'use client';
+
 import { Container } from '@/components/atoms/container';
 import { Product } from '@/types/product.type';
 import CardProduct from '../atoms/cardProduct';
 import Link from 'next/link';
 import { Pages } from '@/enums/pages.enum';
+import { ButtonRouter } from '../atoms/buttonRouter';
+import { useRouter } from 'next/navigation';
 
 export default function ProductsPage({ products }: { products: Product[] }) {
+  const router = useRouter();
+
   return (
     <Container className='text-white'>
+      <ButtonRouter onClick={() => router.back()} variant={'previous'} />
       <h1 className='self-start text-center text-3xl font-bold text-white'>
         Featured products
       </h1>

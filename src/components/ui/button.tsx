@@ -14,9 +14,12 @@ const buttonVariants = cva(
         outline:
           'rounded-4xl bg-white font-normal text-purple-700 transition-all hover:bg-[#e6e6e6] hover:outline-3 focus-visible:outline-purple-700 active:bg-[#bfbfbf] disabled:bg-purple-600/60',
         link: 'text-primary underline-offset-4 hover:underline',
+        comeBack:
+          'group rounded-full self-start text-white/60 ring-2 ring-white/60 transition-all hover:ring-white focus-visible:ring-white focus-visible:outline-offset-4 focus-visible:outline-purple-600 active:ring-white/80',
       },
       size: {
         default: 'px-5 py-2',
+        comeBack: 'p-2',
         icon: 'size-9',
       },
     },

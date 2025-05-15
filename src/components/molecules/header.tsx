@@ -3,10 +3,14 @@
 import { Pages } from '@/enums/pages.enum';
 import CartButton from '../atoms/cartButton';
 import { Link } from '../atoms/link';
+
 import { useCart } from '@/contexts/cartContext';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
   const { totalPrice } = useCart();
+  const router = useRouter();
+
   const totalFormatted = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
@@ -17,9 +21,17 @@ export default function Header() {
       <div className='flex w-full max-w-[1280px] items-center gap-5 px-10 md:gap-10 md:px-12.5 lg:gap-15 lg:px-20'>
         <h1 className='animate-pulse text-3xl font-bold'>Logo</h1>
         <div className='flex w-full flex-row items-center justify-between gap-5'>
-          <Link href={`${Pages.PRODUCTS}`}>Products</Link>
+          <Link
+            href={`${Pages.PRODUCTS}`}
+            aria-label='Link para acessar a página dos produtos'
+          >
+            Products
+          </Link>
         </div>
-        <CartButton>
+        <CartButton
+          onClick={() => router.push(Pages.CART)}
+          aria-label='Botão para acessar o carrinho'
+        >
           <span className='hidden min-[425px]:block'>{totalFormatted}</span>
         </CartButton>
       </div>
