@@ -25,6 +25,7 @@ export default function HomePage({ products }: { products: Product[] }) {
                 <Link
                   key={product.id}
                   href={`${Pages.PRODUCTS}/${product.slug}`}
+                  aria-label={`Link para visualizar o produto ${product.title}`}
                 >
                   <CardProduct
                     title={product.title}
@@ -40,7 +41,12 @@ export default function HomePage({ products }: { products: Product[] }) {
           )}
         </div>
         <Button asChild className='mt-5 w-fit self-center'>
-          <Link href={`${Pages.PRODUCTS}`}>See all products</Link>
+          <Link
+            href={`${Pages.PRODUCTS}`}
+            aria-label='Link para visualizar todos os produtos'
+          >
+            See all products
+          </Link>
         </Button>
       </div>
     </Container>
