@@ -1,14 +1,35 @@
 import { faker } from '@faker-js/faker';
-import { Product } from '@/types/product.type'; // ou '@/types/product.type'
+import { Product } from '@/types/product.type';
+
+faker.seed(2025); // Garantir repetibilidade nos dados mockados
+
+const availableSizes = ['PP', 'P', 'M', 'G', 'GG'];
+const poses = ['relaxado', 'dormindo', 'comendo'];
+
+function generateStableSlug(pose: string, index: number) {
+  return `panda-${pose}-${index + 1}`;
+}
 
 export function generateMockProducts(count = 20): Product[] {
-  return Array.from({ length: count }, (_, index) => ({
-    id: index + 1,
-    title: faker.commerce.productName(),
-    slug: faker.helpers.slugify(faker.commerce.productName().toLowerCase()),
-    price: parseFloat(faker.commerce.price({ min: 29.99, max: 499.99 })),
-    image: faker.image.urlPicsumPhotos(), // você pode trocar por /images/fake-1.jpg etc.
-    description: faker.commerce.productDescription(),
-    featured: faker.datatype.boolean(),
-  }));
+  return Array.from({ length: count }, (_, index) => {
+    const id = index + 1;
+    const poseSelected = poses[index % poses.length];
+    const slug = generateStableSlug(poseSelected, index);
+    const title = `Panda ${id}`;
+
+    return {
+      id,
+      title,
+      slug,
+      price: parseFloat(faker.commerce.price({ min: 99.9, max: 599.99 })),
+      image: `/assets/pandas/panda-1/${poseSelected}.webp`,
+      description: faker.commerce.productDescription(),
+      featured: faker.datatype.boolean(),
+      pose: poseSelected,
+      variations: {
+        sizes: [...availableSizes],
+        poses: [...poses],
+      },
+    };
+  });
 }
