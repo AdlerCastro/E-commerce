@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
-import { generateMockProducts } from '@/lib/mocks/generateProducts';
+import { getAllMockProducts } from '@/lib/mocks/staticProducts';
 import { Product } from '@/types/product.type';
 
 export async function GET() {
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   try {
-    const products: Product[] = generateMockProducts();
+    const products: Product[] = getAllMockProducts();
     const featuredProducts = products.filter((product) => product.featured);
 
     return NextResponse.json(
