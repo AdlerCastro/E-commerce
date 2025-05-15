@@ -6,12 +6,15 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useCart } from '@/contexts/cartContext';
 import { Button } from '../ui/button';
+import { useRouter } from 'next/navigation';
+import { ButtonRouter } from '../atoms/buttonRouter';
 
 export default function ProductPage({ product }: { product: Product }) {
   const [selectedPose, setSelectedPose] = useState(product.pose);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   const { addToCart } = useCart();
+  const router = useRouter();
 
   const imageSrc = `/assets/pandas/panda-1/${selectedPose}.webp`;
 
@@ -32,6 +35,7 @@ export default function ProductPage({ product }: { product: Product }) {
 
   return (
     <Container className='text-white'>
+      <ButtonRouter onClick={() => router.back()} variant={'previous'} />
       <div className='mb-4 space-y-1'>
         <h1 className='text-3xl font-bold'>{product.title}</h1>
         <p className='text-sm text-zinc-300'>{product.description}</p>
