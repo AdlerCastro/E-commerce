@@ -14,7 +14,7 @@ export default function ProductsPage({ products }: { products: Product[] }) {
         {products.map(
           (product) =>
             product.featured && (
-              <Link key={product.id} href={`${Pages.PRODUCTS}/${product.id}`}>
+              <Link key={product.id} href={`${Pages.PRODUCTS}/${product.slug}`}>
                 <CardProduct
                   title={product.title}
                   description={product.description}
@@ -35,7 +35,10 @@ export default function ProductsPage({ products }: { products: Product[] }) {
           {products.map(
             (product) =>
               !product.featured && (
-                <Link key={product.id} href={`${Pages.PRODUCTS}/${product.id}`}>
+                <Link
+                  key={product.id}
+                  href={`${Pages.PRODUCTS}/${product.slug}`}
+                >
                   <CardProduct
                     title={product.title}
                     description={product.description}

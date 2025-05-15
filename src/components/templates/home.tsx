@@ -23,8 +23,8 @@ export default function HomePage({ products }: { products: Product[] }) {
             (product, index) =>
               index < 4 && (
                 <Link
-                  href={`/${Pages.PRODUCTS}/${product.title}`}
                   key={product.id}
+                  href={`${Pages.PRODUCTS}/${product.slug}`}
                 >
                   <CardProduct
                     title={product.title}

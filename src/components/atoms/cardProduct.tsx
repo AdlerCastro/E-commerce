@@ -42,10 +42,7 @@ export default function CardProduct({
           alt={alt}
           width={featured ? 400 : 300}
           height={featured ? 400 : 300}
-          className={cn(
-            'h-full w-full rounded-lg',
-            featured && 'object-cover object-center',
-          )}
+          className='h-full w-full rounded-lg object-cover object-center'
         />
       </div>
       {featured ? (

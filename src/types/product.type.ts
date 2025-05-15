@@ -6,4 +6,9 @@ export type Product = {
   image: string;
   description: string;
   featured: boolean;
+  pose: string;
+  variations: {
+    sizes: string[];
+    poses: string[];
+  };
 };
