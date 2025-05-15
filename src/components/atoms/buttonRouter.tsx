@@ -23,7 +23,6 @@ const buttonRouterVariants = {
 
 function ButtonRouter({
   className,
-  children,
   variant,
   ...props
 }: React.ComponentProps<'button'> & {
