@@ -54,7 +54,9 @@ export default function MyCart() {
     <div className='flex w-full justify-center'>
       <Container className='px-5 md:px-7.5 lg:px-12.5'>
         <ButtonRouter onClick={() => router.back()} variant={'previous'} />
-        <h1 className='px-5 text-center text-3xl font-bold text-white underline underline-offset-4 lg:px-7.5'></h1>
+        <h1 className='px-5 text-center text-3xl font-bold text-white underline underline-offset-4 lg:px-7.5'>
+          My cart
+        </h1>
         <div className='flex w-full flex-col items-center gap-7.5 rounded-2xl bg-zinc-800 px-5 py-8 lg:px-7.5'>
           <div className='flex w-full flex-col gap-5'>
             {cartItems.map((item) => (
@@ -129,6 +131,9 @@ export default function MyCart() {
         >
           <span>Limpar Carrinho</span>
         </CartButton>
+        <Button onClick={() => router.push('/checkout')}>
+          Finalizar Compra
+        </Button>
       </Container>
     </div>
   );
