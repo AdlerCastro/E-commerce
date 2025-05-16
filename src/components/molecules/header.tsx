@@ -38,7 +38,7 @@ export default function Header() {
           onClick={() => router.push(Pages.CART)}
           aria-label='Botão para acessar o carrinho'
         >
-          <span className='hidden min-[425px]:block'>{totalFormatted}</span>
+          <span className='hidden md:block'>{totalFormatted}</span>
         </CartButton>
       </div>
     </div>

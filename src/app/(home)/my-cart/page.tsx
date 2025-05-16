@@ -88,7 +88,7 @@ export default function MyCart() {
                     className='rounded-lg'
                   />
                 </Link>
-                <div className='flex flex-col rounded-2xl bg-zinc-600 p-5'>
+                <div className='flex flex-col rounded-2xl bg-zinc-700 p-5'>
                   <h3 className='text-lg font-bold text-white'>
                     {item.product.title}
                   </h3>
