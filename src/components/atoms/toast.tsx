@@ -51,7 +51,7 @@ const Toast = ({
         </div>
         <span
           onClick={() => toast.dismiss(id)}
-          className='ju relative flex h-5 min-h-5 w-5 min-w-5 cursor-pointer items-center justify-center'
+          className='relative flex h-5 min-h-5 w-5 min-w-5 cursor-pointer items-center justify-center'
         >
           <span className='absolute h-0.5 w-full rotate-45 rounded-full bg-white' />
           <span className='absolute h-0.5 w-full -rotate-45 rounded-full bg-white' />
