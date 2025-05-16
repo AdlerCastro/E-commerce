@@ -40,7 +40,6 @@ export default function CheckoutPage() {
 
   async function onSubmit(formData: FormSchemaType) {
     setIsLoading(true);
-    console.log(formData);
 
     const values: FinalizePurchaseType = {
       ...formData,
@@ -61,6 +60,7 @@ export default function CheckoutPage() {
         variant: 'success',
       });
       setIsLoading(false);
+      router.push('/success');
     } else {
       Toast({
         description: 'Erro ao enviar formulário.' + response.message,
