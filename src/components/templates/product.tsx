@@ -8,6 +8,7 @@ import { useCart } from '@/contexts/cartContext';
 import { Button } from '../ui/button';
 import { useRouter } from 'next/navigation';
 import { ButtonRouter } from '../atoms/buttonRouter';
+import { Toast } from '../atoms/toast';
 
 export default function ProductPage({ product }: { product: Product }) {
   const [selectedPose, setSelectedPose] = useState(product.pose);
@@ -20,12 +21,18 @@ export default function ProductPage({ product }: { product: Product }) {
 
   function handleAddToCart() {
     if (!selectedSize) {
-      alert('Selecione um tamanho antes de adicionar ao carrinho!');
+      Toast({
+        description: 'Selecione um tamanho antes de adicionar ao carrinho!',
+        variant: 'error',
+      });
       return;
     }
 
     addToCart(product, selectedPose, selectedSize);
-    alert('Produto adicionado ao carrinho!');
+    Toast({
+      description: 'Produto adicionado ao carrinho!',
+      variant: 'success',
+    });
   }
 
   const priceFormatted = new Intl.NumberFormat('pt-BR', {

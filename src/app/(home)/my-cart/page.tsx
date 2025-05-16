@@ -3,10 +3,13 @@
 import { ButtonRouter } from '@/components/atoms/buttonRouter';
 import CartButton from '@/components/atoms/cartButton';
 import { Container } from '@/components/atoms/container';
+import { Toast } from '@/components/atoms/toast';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/cartContext';
+import { Pages } from '@/enums/pages.enum';
 import { MinusCircle, PlusCircle, TrashIcon } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 export default function MyCart() {
@@ -28,8 +31,20 @@ export default function MyCart() {
     if (quantity > 1) {
       updateQuantity(productId, selectedPose, selectedSize, quantity - 1);
     } else {
+      Toast({
+        description: 'O carrinho foi limpo!',
+        variant: 'success',
+      });
       removeFromCart(productId, selectedPose, selectedSize);
     }
+  };
+
+  const handleClearCart = () => {
+    Toast({
+      description: 'O carrinho foi limpo!',
+      variant: 'success',
+    });
+    clearCart();
   };
 
   if (cartItems.length === 0) {
@@ -54,7 +69,9 @@ export default function MyCart() {
     <div className='flex w-full justify-center'>
       <Container className='px-5 md:px-7.5 lg:px-12.5'>
         <ButtonRouter onClick={() => router.back()} variant={'previous'} />
-        <h1 className='px-5 text-center text-3xl font-bold text-white underline underline-offset-4 lg:px-7.5'></h1>
+        <h1 className='px-5 text-center text-3xl font-bold text-white underline underline-offset-4 lg:px-7.5'>
+          My cart
+        </h1>
         <div className='flex w-full flex-col items-center gap-7.5 rounded-2xl bg-zinc-800 px-5 py-8 lg:px-7.5'>
           <div className='flex w-full flex-col gap-5'>
             {cartItems.map((item) => (
@@ -62,13 +79,15 @@ export default function MyCart() {
                 key={item.product.id}
                 className='flex w-full items-center justify-between gap-5'
               >
-                <Image
-                  src={item.product.image}
-                  alt={`${item.product.title} ${item.product.pose}`}
-                  width={300}
-                  height={300}
-                  className='rounded-lg'
-                />
+                <Link href={`${Pages.PRODUCTS}/${item.product.slug}`}>
+                  <Image
+                    src={item.product.image}
+                    alt={`${item.product.title} ${item.product.pose}`}
+                    width={300}
+                    height={300}
+                    className='rounded-lg'
+                  />
+                </Link>
                 <div className='flex flex-col rounded-2xl bg-zinc-600 p-5'>
                   <h3 className='text-lg font-bold text-white'>
                     {item.product.title}
@@ -124,11 +143,14 @@ export default function MyCart() {
           </div>
         </div>
         <CartButton
-          onClick={() => clearCart()}
+          onClick={() => handleClearCart()}
           icon={<TrashIcon className='h-5 w-5' />}
         >
           <span>Limpar Carrinho</span>
         </CartButton>
+        <Button onClick={() => router.push('/checkout')}>
+          Finalizar Compra
+        </Button>
       </Container>
     </div>
   );

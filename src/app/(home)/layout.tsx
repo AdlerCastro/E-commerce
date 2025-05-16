@@ -1,5 +1,6 @@
 import Header from '@/components/molecules/header';
 import { CartProvider } from '@/contexts/cartContext';
+import { Toaster } from 'sonner';
 
 export default function HomeLayout({
   children,
@@ -12,6 +13,7 @@ export default function HomeLayout({
         <Header />
         {children}
       </main>
+      <Toaster />
     </CartProvider>
   );
 }

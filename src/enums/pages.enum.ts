@@ -4,4 +4,6 @@ export enum Pages {
   CART = '/my-cart',
   LOGIN = '/login',
   REGISTER = '/register',
+  CHECKOUT = '/checkout',
+  SUCCESS = '/success',
 }

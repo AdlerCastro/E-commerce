@@ -8,25 +8,36 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 
 const mockProduct = (id: number): Product => ({
   id,
-  title: `Produto ${id}`,
-  slug: `produto-${id}`,
+  title: `Panda ${id}`,
+  slug: `panda-${id}`,
   price: 100,
-  image: 'https://example.com/image.jpg',
-  description: 'Descrição',
+  image: `/assets/pandas/panda-${id}/relaxado.webp`,
+  description: 'Descrição do panda',
   featured: false,
+  pose: 'relaxado',
+  variations: {
+    sizes: ['PP', 'P', 'M', 'G', 'GG'],
+    poses: ['relaxado', 'dormindo', 'comendo'],
+  },
 });
 
 describe('CartContext', () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
   it('deve adicionar um novo item ao carrinho', () => {
     const { result } = renderHook(() => useCart(), { wrapper });
 
     act(() => {
-      result.current.addToCart(mockProduct(1));
+      result.current.addToCart(mockProduct(1), 'relaxado', 'M');
     });
 
     expect(result.current.cartItems).toHaveLength(1);
     expect(result.current.cartItems[0]).toEqual({
-      ...mockProduct(1),
+      product: mockProduct(1),
+      selectedPose: 'relaxado',
+      selectedSize: 'M',
       quantity: 1,
     });
   });
@@ -35,37 +46,31 @@ describe('CartContext', () => {
     const { result } = renderHook(() => useCart(), { wrapper });
 
     act(() => {
-      result.current.addToCart(mockProduct(2));
-      result.current.addToCart(mockProduct(2));
+      result.current.addToCart(mockProduct(2), 'comendo', 'G');
+      result.current.addToCart(mockProduct(2), 'comendo', 'G');
     });
 
     expect(result.current.cartItems).toHaveLength(1);
-    expect(result.current.cartItems[0]).toEqual({
-      ...mockProduct(2),
-      quantity: 2,
-    });
+    expect(result.current.cartItems[0].quantity).toBe(2);
   });
 
-  it('deve atualizar a quantidade de um item corretamente', () => {
+  it('deve atualizar a quantidade corretamente', () => {
     const { result } = renderHook(() => useCart(), { wrapper });
 
     act(() => {
-      result.current.addToCart(mockProduct(3));
-      result.current.updateQuantity(3, 5);
+      result.current.addToCart(mockProduct(3), 'dormindo', 'P');
+      result.current.updateQuantity(3, 'dormindo', 'P', 5);
     });
 
-    expect(result.current.cartItems[0]).toEqual({
-      ...mockProduct(3),
-      quantity: 5,
-    });
+    expect(result.current.cartItems[0].quantity).toBe(5);
   });
 
-  it('deve remover um item do carrinho', () => {
+  it('deve remover um item específico do carrinho', () => {
     const { result } = renderHook(() => useCart(), { wrapper });
 
     act(() => {
-      result.current.addToCart(mockProduct(4));
-      result.current.removeFromCart(mockProduct(4).id);
+      result.current.addToCart(mockProduct(4), 'relaxado', 'GG');
+      result.current.removeFromCart(4, 'relaxado', 'GG');
     });
 
     expect(result.current.cartItems).toHaveLength(0);
@@ -75,11 +80,23 @@ describe('CartContext', () => {
     const { result } = renderHook(() => useCart(), { wrapper });
 
     act(() => {
-      result.current.addToCart(mockProduct(5));
-      result.current.addToCart(mockProduct(6));
+      result.current.addToCart(mockProduct(5), 'comendo', 'G');
+      result.current.addToCart(mockProduct(6), 'dormindo', 'M');
       result.current.clearCart();
     });
 
     expect(result.current.cartItems).toEqual([]);
+  });
+
+  it('deve calcular o preço total corretamente', () => {
+    const { result } = renderHook(() => useCart(), { wrapper });
+
+    act(() => {
+      result.current.addToCart(mockProduct(7), 'relaxado', 'P');
+      result.current.addToCart(mockProduct(8), 'relaxado', 'P');
+      result.current.updateQuantity(8, 'relaxado', 'P', 3);
+    });
+
+    expect(result.current.totalPrice()).toBe(100 + 300);
   });
 });
